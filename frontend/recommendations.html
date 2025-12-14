@@ -4,46 +4,103 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MajorMatch Recommendations</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .card { border: 1px solid #ddd; padding: 12px; margin-bottom: 10px; border-radius: 4px; }
-    .top { background: #f7f9fc; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Your Recommendations</h1>
-  <p>This page uses the latest recommendations stored from the questionnaire page.</p>
-  <div id="recommendations"></div>
+
+  <div class="main-card">
+    <h1>Your Recommended Majors</h1>
+    <p style="text-align: center; margin-bottom: 30px;">
+        Based on the data you provided in the questionnaire.
+    </p>
+
+    <!-- Container for dynamic results -->
+    <div id="recommendations-container" class="major-card-container"></div>
+
+    <!-- Retake Button -->
+    <div class="btn-container" style="margin-top: 40px;">
+        <a href="questionnaire.html" class="btn-primary">Retake Questionnaire</a>
+    </div>
+  </div>
+
   <script>
-    const container = document.getElementById('recommendations');
-    const raw = localStorage.getItem('majorMatchResults');
+    const container = document.getElementById('recommendations-container');
+    
+    // IMPORTANT: This key must match what was set in questionnaire.html
+    const raw = localStorage.getItem('latestRecommendations');
 
     if (!raw) {
-      container.innerHTML = '<p>No recommendations found. Please complete the questionnaire first.</p>';
+      container.innerHTML = '<p style="text-align:center; color: #666;">No recommendations found. Please complete the questionnaire first.</p>';
     } else {
-      const data = JSON.parse(raw);
-      const { top_recommendation, alternatives, message } = data;
-      if (!top_recommendation) {
-        container.innerHTML = `<p>${message || 'No recommendation found.'}</p>`;
-      } else {
-        const top = document.createElement('div');
-        top.className = 'card top';
-        top.innerHTML = `<strong>Top Recommendation:</strong> ${top_recommendation.major_name}<br/>Reason: ${top_recommendation.reason || 'Similar to your profile'}`;
-        container.appendChild(top);
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch (e) {
+        container.innerHTML = '<p style="text-align:center; color: red;">Error loading data.</p>';
+      }
 
-        const list = document.createElement('div');
-        (alternatives || []).forEach((alt) => {
-          const el = document.createElement('div');
-          el.className = 'card';
-          el.innerHTML = `<strong>${alt.major_name}</strong><br/>Score: ${alt.score.toFixed(3)}<br/>Reason: ${alt.reason || 'Related to your skills/hobbies'}`;
-          list.appendChild(el);
-        });
-        if (!alternatives || alternatives.length === 0) {
-          const empty = document.createElement('p');
-          empty.textContent = 'No alternatives available.';
-          list.appendChild(empty);
+      if (data) {
+        const { top_recommendation, alternatives, message } = data;
+
+        // 1. Check if backend returned a specific message instead of data
+        if (!top_recommendation) {
+          container.innerHTML = `<p style="text-align:center;">${message || 'No recommendation found based on your inputs.'}</p>`;
+        } else {
+          
+          // --- RENDER TOP RECOMMENDATION ---
+          const topCard = document.createElement('div');
+          topCard.className = 'major-card';
+          // Add specific styling to highlight the top choice
+          topCard.style.backgroundColor = '#f0f8ff'; 
+          topCard.style.borderRightColor = '#4A90E2';
+          
+          topCard.innerHTML = `
+            <h2 style="margin-bottom: 10px; color: #4A90E2;">★ Top Match: ${top_recommendation.major_name}</h2>
+            <p><strong>Why:</strong> ${top_recommendation.reason || 'Strongest match based on your academic profile and interests.'}</p>
+          `;
+          container.appendChild(topCard);
+
+          // --- RENDER HEADER FOR ALTERNATIVES ---
+          if (alternatives && alternatives.length > 0) {
+              const altHeader = document.createElement('h3');
+              altHeader.innerText = "Other Strong Options";
+              altHeader.style.marginTop = "30px";
+              altHeader.style.marginBottom = "15px";
+              altHeader.style.color = "#333";
+              altHeader.style.fontFamily = "var(--font-heading)";
+              container.appendChild(altHeader);
+          }
+
+          // --- RENDER ALTERNATIVES ---
+          (alternatives || []).forEach((alt) => {
+            const card = document.createElement('div');
+            card.className = 'major-card';
+            // Styling for alternatives (white bg, grey accent)
+            card.style.background = '#FFFFFF';
+            card.style.border = '1px solid #E0E0E0';
+            card.style.borderRight = '5px solid #B0C4DE';
+
+            card.innerHTML = `
+              <h2 style="font-size: 18px; color: #333;">${alt.major_name}</h2>
+              <p style="font-size: 14px; margin-bottom: 5px;">
+                <strong>Match Score:</strong> ${(alt.score * 100).toFixed(0)}%
+              </p>
+              <p style="font-size: 14px; color: #666;">
+                ${alt.reason || 'Good alternative based on your skills.'}
+              </p>
+            `;
+            container.appendChild(card);
+          });
+
+          // Handle case where alternatives array exists but is empty
+          if (!alternatives || alternatives.length === 0) {
+            const empty = document.createElement('p');
+            empty.textContent = 'No other close matches found.';
+            empty.style.textAlign = 'center';
+            empty.style.fontStyle = 'italic';
+            container.appendChild(empty);
+          }
         }
-        container.appendChild(list);
       }
     }
   </script>

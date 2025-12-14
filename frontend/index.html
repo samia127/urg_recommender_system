@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>البحث عن تخصصك الجامعي</title>
+    <title>Majors recommender system</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="main-card" style="text-align: center;">
-        <h2>FIND YOUR PERFECT UNIVERSITY MAJOR</h2>
-        <p style="font-size: var(--body-size); color: var(--text-color); margin-bottom: 30px;">
+        <h2 class="index-header">FIND YOUR UNIVERSITY MAJOR</h2>
+        <p class="index-sub">
             Answer a few questions and get personalized major recommendations
         </p>
-        <a href="questionnaire.html" class="btn btn-primary" id="get-started-btn">GET STARTED</a>
+        <a href="questionnaire.html" class="btn-primary">GET STARTED</a>
     </div>
 
     <script>
-        document.getElementById('get-started-btn').addEventListener('click', function(e) {
-            
+        // Simple console log as requested in original code
+        document.querySelector('.btn-primary').addEventListener('click', function(e) {
             console.log("Starting the questionnaire...");
-           
         });
     </script>
 </body>

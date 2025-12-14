@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
