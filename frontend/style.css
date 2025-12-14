@@ -1,0 +1,199 @@
+
+:root {
+    
+    --primary-color: #4A90E2;       
+    --secondary-color: #8ECDDB;    
+    --text-color: #333333;          
+    --background-color: #F9F9F9;    
+    --border-color: #E0E0E0;        
+    --white: #FFFFFF;
+
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+
+    --h1-size: 36px;
+    --h2-size: 24px;
+    --body-size: 16px;
+    --small-size: 14px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    direction: rtl; 
+    text-align: right;
+    line-height: 1.6;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: var(--h1-size);
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: var(--h2-size);
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.main-card {
+    max-width: 700px;
+    margin: 40px auto;
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+.section-divider {
+    border-top: 1px solid var(--border-color);
+    margin: 30px 0;
+}
+
+.academic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px 40px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group label {
+    flex-shrink: 0; 
+    font-size: var(--body-size);
+    color: var(--text-color);
+}
+
+.input-group input[type="text"] {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    text-align: right; 
+    font-size: var(--body-size);
+    max-width: 80px; 
+}
+
+.checkbox-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    background-color: #f0f8ff; 
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    font-size: var(--small-size);
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-left: 10px;
+    margin-right: 0;
+    width: 15px;
+    height: 15px;
+    order: 2; 
+}
+
+.checkbox-item label {
+    font-weight: normal;
+    margin-bottom: 0;
+    order: 1; 
+}
+
+input[type="text"]:not(.input-group input[type="text"]), textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    font-family: var(--font-body);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s, transform 0.1s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-family: var(--font-heading);
+}
+
+.btn-primary:hover {
+    background-color: #3a75c4;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.btn-secondary:hover {
+    background-color: #ccc;
+}
+.major-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.major-card {
+    background-color: var(--secondary-color); 
+    border-right: 5px solid var(--primary-color); 
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 768px) {
+    .academic-grid {
+        grid-template-columns: 1fr;
+    }
+    .main-card {
+        margin: 20px;
+    }
+}
