@@ -8,6 +8,8 @@ from typing import Dict, List
 
 import pandas as pd
 
+from . import config
+
 
 def _extract_overall_grade(grade_text: str) -> float | None:
     """Extract a numeric overall grade percentage if present."""
@@ -27,11 +29,16 @@ def _count_overlaps(user_terms: List[str], target_terms: List[str]) -> int:
     return len(user_lower & target_lower)
 
 
-def apply_rules(ranked_majors: List[Dict[str, object]], user_profile: Dict[str, object], majors_df: pd.DataFrame, top_n: int = 10):
+def apply_rules(
+    ranked_majors: List[Dict[str, object]],
+    user_profile: Dict[str, object],
+    majors_df: pd.DataFrame,
+    top_n: int = config.RULES_TOP_N,
+):
     """Apply simple domain rules to the top ranked majors."""
 
     trimmed = ranked_majors[:top_n]
-    grade_value = _extract_overall_grade(user_profile.get("grades", ""))
+    grade_value = _extract_overall_grade(str(user_profile.get("grades", "")))
     career_text = str(user_profile.get("career_aspiration", "")).lower()
     user_skills = user_profile.get("skills", []) or []
 
@@ -44,7 +51,7 @@ def apply_rules(ranked_majors: List[Dict[str, object]], user_profile: Dict[str, 
         min_grade = row.get("min_overall_percentage (%)")
         if isinstance(min_grade, (int, float)) and not math.isnan(min_grade) and grade_value is not None:
             if grade_value < float(min_grade):
-                score *= 0.75  # Penalize if grade appears below requirement
+                score *= config.GRADE_PENALTY_FACTOR
 
         career_hits = 0
         for field in ["example_career_paths", "industry_keywords"]:
@@ -52,7 +59,7 @@ def apply_rules(ranked_majors: List[Dict[str, object]], user_profile: Dict[str, 
             if isinstance(options, list):
                 career_hits += sum(1 for option in options if str(option).lower() in career_text)
         if career_hits:
-            score *= 1.15
+            score *= config.CAREER_BOOST_FACTOR
 
         overlap_sources = []
         for field in ["curriculum_keywords", "learning_style", "required_hs_subjects"]:
@@ -60,16 +67,54 @@ def apply_rules(ranked_majors: List[Dict[str, object]], user_profile: Dict[str, 
             if isinstance(value, list):
                 overlap_sources.extend([str(item) for item in value])
         overlap_count = _count_overlaps(user_skills, overlap_sources)
-        if overlap_count >= 2:
-            score *= 1.10
+        if overlap_count >= config.SKILL_OVERLAP_THRESHOLD:
+            score *= config.SKILL_BOOST_FACTOR
 
-        adjusted.append({"major_name": entry["major_name"], "score": score, "index": idx})
+        adjusted.append(
+            {
+                "major_name": entry["major_name"],
+                "score": score,
+                "index": idx,
+                "skill_overlap": overlap_count,
+                "career_hits": career_hits,
+            }
+        )
 
     adjusted.sort(key=lambda item: item["score"], reverse=True)
     return adjusted
 
 
-def generate_recommendation_report(top_major: Dict[str, object], user_profile: Dict[str, object], all_ranked_majors: List[Dict[str, object]]):
+def build_reason(entry: Dict[str, object], user_profile: Dict[str, object], majors_df: pd.DataFrame) -> str:
+    """Craft a short explanation for why a major was suggested."""
+
+    idx = entry.get("index")
+    row = majors_df.iloc[idx] if idx is not None and not majors_df.empty else {}
+    matched_skills = entry.get("skill_overlap", 0)
+    career_hits = entry.get("career_hits", 0)
+
+    highlights = []
+    if matched_skills:
+        highlights.append(
+            f"Matched {matched_skills} of your skills with the major's curriculum"
+        )
+    if career_hits:
+        highlights.append("Career aspiration closely aligns with example paths")
+    if isinstance(row, pd.Series):
+        subjects = row.get("required_hs_subjects", [])
+        if subjects:
+            highlights.append(f"Key subjects: {', '.join(subjects)}")
+
+    if not highlights:
+        highlights.append("Strong textual similarity to your interests and profile")
+
+    return "; ".join(highlights)
+
+
+def generate_recommendation_report(
+    top_major: Dict[str, object],
+    user_profile: Dict[str, object],
+    all_ranked_majors: List[Dict[str, object]],
+):
     """Create a human-readable report summarizing the recommendation."""
 
     if not top_major:
@@ -100,3 +145,6 @@ def generate_recommendation_report(top_major: Dict[str, object], user_profile: D
         "alternatives": alternatives,
         "confidence": confidence,
     }
+
+
+__all__ = ["apply_rules", "generate_recommendation_report", "build_reason"]

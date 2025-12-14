@@ -1,59 +1,36 @@
-"""User input helpers designed for Google Colab text workflows."""
+"""Helpers for preparing user data coming from web forms or APIs."""
 
 from __future__ import annotations
 
 from typing import Dict, List
 
 
-def _select_from_options(options: List[str], prompt: str) -> List[str]:
-    if not options:
-        return []
-
-    print(prompt)
-    for idx, option in enumerate(options, start=1):
-        print(f"[{idx}] {option}")
-
-    selection = input("Enter comma-separated numbers (or leave blank): ").strip()
-    chosen: List[str] = []
-    if selection:
-        tokens = [token.strip() for token in selection.split(",") if token.strip()]
-        for token in tokens:
-            if token.isdigit():
-                number = int(token)
-                if 1 <= number <= len(options):
-                    chosen.append(options[number - 1])
-                else:
-                    print(f"Ignoring invalid choice: {token}")
-            else:
-                print(f"Ignoring invalid token: {token}")
-
-    custom = input("Add any custom entries (comma-separated, optional): ").strip()
-    if custom:
-        chosen.extend([item.strip() for item in custom.split(",") if item.strip()])
-
-    return chosen
+def _combine_entries(selected: List[str] | None, custom: List[str] | None) -> List[str]:
+    combined: List[str] = []
+    for source in (selected or [], custom or []):
+        if isinstance(source, list):
+            combined.extend([item.strip() for item in source if item and item.strip()])
+    return combined
 
 
-def collect_user_input(skills: List[str] | None = None, hobbies: List[str] | None = None) -> Dict[str, object]:
-    """Collect user information in a notebook-friendly way."""
+def normalize_user_data(form_data: Dict[str, object]) -> Dict[str, object]:
+    """Normalize raw form data into the structure expected by the recommender."""
 
-    print("Please provide your academic grades (e.g., 'Overall 85% | Math 90 | English 88').")
-    grades = input("Academic grades: ").strip()
+    grades = form_data.get("grades", {})
+    if isinstance(grades, dict):
+        grades_text = "; ".join(f"{k}: {v}" for k, v in grades.items() if v)
+    else:
+        grades_text = str(grades)
 
-    print("Describe your career aspiration in one sentence (e.g., 'software engineer in fintech').")
-    career_aspiration = input("Career aspiration: ").strip()
+    skills = _combine_entries(form_data.get("skills"), form_data.get("custom_skills"))
+    hobbies = _combine_entries(form_data.get("hobbies"), form_data.get("custom_hobbies"))
 
-    skills_list = skills or []
-    hobbies_list = hobbies or []
-
-    chosen_skills = _select_from_options(skills_list, "Select your skills (checkbox style):")
-    chosen_hobbies = _select_from_options(hobbies_list, "Select your hobbies (checkbox style):")
-
-    user_profile = {
-        "grades": grades,
-        "career_aspiration": career_aspiration,
-        "skills": chosen_skills,
-        "hobbies": chosen_hobbies,
+    return {
+        "grades": grades_text,
+        "career_aspiration": str(form_data.get("career_aspiration", "")).strip(),
+        "skills": skills,
+        "hobbies": hobbies,
     }
 
-    return user_profile
+
+__all__ = ["normalize_user_data"]

@@ -1,100 +1,51 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نتائج التوصيات</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .main-card {
-            max-width: 900px;
-            margin: 40px auto;
-        }
-        .major-card {
-            background-color: #F0F8FF; 
-            border-right: 5px solid var(--primary-color);
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-        }
-        .major-card h3 {
-            color: var(--heading-color, #0056b3);
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-size: 1.5rem;
-        }
-        .major-card p {
-            color: var(--text-color, #333);
-        }
-        .major-card-container {
-            margin-top: 30px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MajorMatch Recommendations</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .card { border: 1px solid #ddd; padding: 12px; margin-bottom: 10px; border-radius: 4px; }
+    .top { background: #f7f9fc; }
+  </style>
 </head>
 <body>
-    <div class="main-card">
-        <h1>نتائج التوصيات لتخصصك الجامعي 🎯</h1>
-        <p style="text-align: center;">بناءً على إجاباتك، إليك التخصصات التي تناسبك بشكل أفضل:</p>
-        
-        <div id="recommendations-list" class="major-card-container">
-            </div>
+  <h1>Your Recommendations</h1>
+  <p>This page uses the latest recommendations stored from the questionnaire page.</p>
+  <div id="recommendations"></div>
+  <script>
+    const container = document.getElementById('recommendations');
+    const raw = localStorage.getItem('majorMatchResults');
 
-        <div id="no-results-message" style="display: none; text-align: center; padding: 20px; border: 1px dashed #E0E0E0; border-radius: 8px; margin-top: 30px;">
-            </div>
+    if (!raw) {
+      container.innerHTML = '<p>No recommendations found. Please complete the questionnaire first.</p>';
+    } else {
+      const data = JSON.parse(raw);
+      const { top_recommendation, alternatives, message } = data;
+      if (!top_recommendation) {
+        container.innerHTML = `<p>${message || 'No recommendation found.'}</p>`;
+      } else {
+        const top = document.createElement('div');
+        top.className = 'card top';
+        top.innerHTML = `<strong>Top Recommendation:</strong> ${top_recommendation.major_name}<br/>Reason: ${top_recommendation.reason || 'Similar to your profile'}`;
+        container.appendChild(top);
 
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="questionnaire.html" class="btn btn-primary" style="background-color: #007bff;">إعادة الاستبيان</a>
-        </div>
-    </div>
-    
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const resultsContainer = document.getElementById('recommendations-list');
-        const noResultsMessage = document.getElementById('no-results-message');
-        
-        const storedResults = sessionStorage.getItem('majorRecommendations');
-        
-        if (storedResults) {
-            try {
-                const recommendations = JSON.parse(storedResults);
-                
-                if (recommendations.length > 0) {
-                    
-                    recommendations.forEach(major => {
-                        const card = document.createElement('div');
-                        card.className = 'major-card';
-                        
-                        const content = `
-                            <div style="width: 100%;">
-                                <h3 style="color: var(--primary-color);">${major.name_ar} - ${major.match_score}</h3>
-                                <p style="font-size: 14px; margin-top: 5px; color: var(--text-color);">${major.description}</p>
-                            </div>
-                        `;
-                        
-                        card.innerHTML = content;
-                        resultsContainer.appendChild(card);
-                    });
-                    
-                    sessionStorage.removeItem('majorRecommendations');
-                } else {
-                    
-                    noResultsMessage.innerHTML = '<p><strong>عذراً، لم نجد تخصصات تتجاوز نسبة توافق 70% حالياً.</strong></p><p>حاول إدخال درجات أعلى أو مهارات تتوافق مع تخصص معين (مثل 95 في الرياضيات وعلوم الحاسوب).</p>';
-                    noResultsMessage.style.display = 'block';
-                }
-            } catch (error) {
-                console.error("Error parsing stored recommendations:", error);
-                noResultsMessage.innerHTML = '<p>حدث خطأ في قراءة البيانات المخزنة.</p>';
-                noResultsMessage.style.display = 'block';
-            }
-        } else {
-            
-            noResultsMessage.innerHTML = '<p>يرجى العودة إلى <a href="questionnaire.html">صفحة الاستبيان</a> أولاً لملء البيانات.</p>';
-            noResultsMessage.style.display = 'block';
+        const list = document.createElement('div');
+        (alternatives || []).forEach((alt) => {
+          const el = document.createElement('div');
+          el.className = 'card';
+          el.innerHTML = `<strong>${alt.major_name}</strong><br/>Score: ${alt.score.toFixed(3)}<br/>Reason: ${alt.reason || 'Related to your skills/hobbies'}`;
+          list.appendChild(el);
+        });
+        if (!alternatives || alternatives.length === 0) {
+          const empty = document.createElement('p');
+          empty.textContent = 'No alternatives available.';
+          list.appendChild(empty);
         }
-    });
-    </script>
+        container.appendChild(list);
+      }
+    }
+  </script>
 </body>
 </html>
