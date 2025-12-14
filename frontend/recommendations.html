@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MajorMatch Recommendations</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .card { border: 1px solid #ddd; padding: 12px; margin-bottom: 10px; border-radius: 4px; }
+    .top { background: #f7f9fc; }
+  </style>
+</head>
+<body>
+  <h1>Your Recommendations</h1>
+  <p>This page uses the latest recommendations stored from the questionnaire page.</p>
+  <div id="recommendations"></div>
+  <script>
+    const container = document.getElementById('recommendations');
+    const raw = localStorage.getItem('majorMatchResults');
+
+    if (!raw) {
+      container.innerHTML = '<p>No recommendations found. Please complete the questionnaire first.</p>';
+    } else {
+      const data = JSON.parse(raw);
+      const { top_recommendation, alternatives, message } = data;
+      if (!top_recommendation) {
+        container.innerHTML = `<p>${message || 'No recommendation found.'}</p>`;
+      } else {
+        const top = document.createElement('div');
+        top.className = 'card top';
+        top.innerHTML = `<strong>Top Recommendation:</strong> ${top_recommendation.major_name}<br/>Reason: ${top_recommendation.reason || 'Similar to your profile'}`;
+        container.appendChild(top);
+
+        const list = document.createElement('div');
+        (alternatives || []).forEach((alt) => {
+          const el = document.createElement('div');
+          el.className = 'card';
+          el.innerHTML = `<strong>${alt.major_name}</strong><br/>Score: ${alt.score.toFixed(3)}<br/>Reason: ${alt.reason || 'Related to your skills/hobbies'}`;
+          list.appendChild(el);
+        });
+        if (!alternatives || alternatives.length === 0) {
+          const empty = document.createElement('p');
+          empty.textContent = 'No alternatives available.';
+          list.appendChild(empty);
+        }
+        container.appendChild(list);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MajorMatch Questionnaire</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    fieldset { margin-bottom: 16px; }
+    .result { border: 1px solid #ddd; padding: 12px; margin-top: 16px; }
+    .top-major { font-size: 1.1em; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>MajorMatch Questionnaire</h1>
+  <p>Fill in your grades, skills, hobbies, and aspirations to see matching majors.</p>
+
+  <form id="questionnaire-form">
+    <fieldset>
+      <legend>Academic Grades</legend>
+      <label>English: <input type="text" name="grade_english" /></label><br />
+      <label>Mathematics: <input type="text" name="grade_mathematics" /></label><br />
+      <label>Computer Science: <input type="text" name="grade_computer_science" /></label><br />
+      <label>Physics: <input type="text" name="grade_physics" /></label><br />
+      <label>Overall Percentage: <input type="text" name="grade_overall" /></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Career Aspiration</legend>
+      <input type="text" name="career_aspiration" placeholder="e.g., software engineer in fintech" style="width: 100%;" />
+    </fieldset>
+
+    <fieldset>
+      <legend>Skills (select all that apply)</legend>
+      <label><input type="checkbox" name="skills" value="Problem Solving" /> Problem Solving</label><br />
+      <label><input type="checkbox" name="skills" value="Communication" /> Communication</label><br />
+      <label><input type="checkbox" name="skills" value="Digital Literacy / Technology Skills" /> Digital Literacy / Technology Skills</label><br />
+      <label><input type="checkbox" name="skills" value="Creativity" /> Creativity</label><br />
+      <label><input type="checkbox" name="skills" value="Leadership" /> Leadership</label><br />
+      <label>Custom skills (comma-separated): <input type="text" id="custom_skills" /></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Hobbies (select all that apply)</legend>
+      <label><input type="checkbox" name="hobbies" value="Reading" /> Reading</label><br />
+      <label><input type="checkbox" name="hobbies" value="Coding" /> Coding</label><br />
+      <label><input type="checkbox" name="hobbies" value="Video Games" /> Video Games</label><br />
+      <label><input type="checkbox" name="hobbies" value="Robotics" /> Robotics</label><br />
+      <label><input type="checkbox" name="hobbies" value="Music" /> Music</label><br />
+      <label>Custom hobbies (comma-separated): <input type="text" id="custom_hobbies" /></label>
+    </fieldset>
+
+    <button type="submit">Get Recommendations</button>
+  </form>
+
+  <div id="results" class="result" style="display: none;"></div>
+  <p><a href="recommendations.html" target="_blank">Open recommendations page</a> (uses latest results).</p>
+
+  <script>
+    const form = document.getElementById('questionnaire-form');
+    const resultsContainer = document.getElementById('results');
+
+    function parseCommaSeparated(value) {
+      return value
+        .split(',')
+        .map((item) => item.trim())
+        .filter((item) => item.length > 0);
+    }
+
+    function collectFormData() {
+      const data = {
+        grades: {
+          english: form.grade_english.value,
+          mathematics: form.grade_mathematics.value,
+          computer_science: form.grade_computer_science.value,
+          physics: form.grade_physics.value,
+          overall: form.grade_overall.value,
+        },
+        career_aspiration: form.career_aspiration.value,
+        skills: Array.from(form.querySelectorAll('input[name="skills"]:checked')).map((el) => el.value),
+        custom_skills: parseCommaSeparated(document.getElementById('custom_skills').value),
+        hobbies: Array.from(form.querySelectorAll('input[name="hobbies"]:checked')).map((el) => el.value),
+        custom_hobbies: parseCommaSeparated(document.getElementById('custom_hobbies').value),
+      };
+      return data;
+    }
+
+    function renderResults(response) {
+      const { top_recommendation, alternatives, message } = response;
+      if (!top_recommendation) {
+        resultsContainer.style.display = 'block';
+        resultsContainer.innerHTML = `<p>${message || 'No recommendation available.'}</p>`;
+        return;
+      }
+
+      const altList = (alternatives || [])
+        .map((alt) => `<li>${alt.major_name} (score: ${alt.score.toFixed(3)})</li>`)
+        .join('');
+
+      resultsContainer.style.display = 'block';
+      resultsContainer.innerHTML = `
+        <div class="top-major">Top recommendation: ${top_recommendation.major_name}</div>
+        <div>Reason: ${top_recommendation.reason || 'Similar to your profile'}</div>
+        <h4>Alternatives</h4>
+        <ul>${altList || '<li>No alternatives available</li>'}</ul>
+      `;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = collectFormData();
+      resultsContainer.style.display = 'block';
+      resultsContainer.textContent = 'Requesting recommendations...';
+
+      try {
+        const response = await fetch('http://localhost:5000/api/recommend', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json();
+        localStorage.setItem('majorMatchResults', JSON.stringify(data));
+        renderResults(data);
+      } catch (err) {
+        resultsContainer.style.display = 'block';
+        resultsContainer.textContent = 'Error contacting backend. Is it running?';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
