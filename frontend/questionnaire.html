@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استبيان التخصص</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="major-form" class="main-card">
+        <div class="form-section">
+            <h2 style="color: var(--text-color);">first, let's with your academic performance</h2>
+            <div class="academic-grid">
+                <div>
+                    <div class="input-group">
+                        <label for="arabic">Arabic language</label>
+                        <input type="text" id="arabic" name="academic_arabic">
+                    </div>
+                    <div class="input-group">
+                        <label for="social-studies">Social Studies</label>
+                        <input type="text" id="social-studies" name="academic_social">
+                    </div>
+                    <div class="input-group">
+                        <label for="islamic-studies">Islamic studies</label>
+                        <input type="text" id="islamic-studies" name="academic_islamic">
+                    </div>
+                    <div class="input-group">
+                        <label for="science">Science</label>
+                        <input type="text" id="science" name="academic_science">
+                    </div>
+                    <div class="input-group">
+                        <label for="chemistry">Chemistry</label>
+                        <input type="text" id="chemistry" name="academic_chemistry">
+                    </div>
+                    <div class="input-group">
+                        <label for="physics">Physics</label>
+                        <input type="text" id="physics" name="academic_physics">
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <label for="english">English language</label>
+                        <input type="text" id="english" name="academic_english">
+                    </div>
+                    <div class="input-group">
+                        <label for="computer-science">Computer Science</label>
+                        <input type="text" id="computer-science" name="academic_cs">
+                    </div>
+                    <div class="input-group">
+                        <label for="mathematics">Mathematics</label>
+                        <input type="text" id="mathematics" name="academic_math">
+                    </div>
+                    <div class="input-group">
+                        <label for="biology">Biology</label>
+                        <input type="text" id="biology" name="academic_biology">
+                    </div>
+                    <div class="input-group">
+                        <label for="geography">Geography</label>
+                        <input type="text" id="geography" name="academic_geography">
+                    </div>
+                    <div class="input-group">
+                        <label for="history">History</label>
+                        <input type="text" id="history" name="academic_history">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-section">
+            <h2>؟What are you good at</h2>
+            <div class="checkbox-grid">
+                <div class="checkbox-item"><input type="checkbox" id="critical-thinking" name="skill_critical"><label for="critical-thinking">Critical Thinking</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="leadership" name="skill_leadership"><label for="leadership">Leadership</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="problem-solving" name="skill_problem"><label for="problem-solving">Problem Solving</label></div>
+                
+                <div class="checkbox-item"><input type="checkbox" id="communication" name="skill_communication"><label for="communication">Communication</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="teamwork" name="skill_teamwork"><label for="teamwork">Teamwork</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="interpersonal" name="skill_interpersonal"><label for="interpersonal">Interpersonal Skills</label></div>
+                
+                <div class="checkbox-item"><input type="checkbox" id="technical" name="skill_technical"><label for="technical">Technical Literacy</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="creativity" name="skill_creativity"><label for="creativity">Creativity</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="time-management" name="skill_time"><label for="time-management">Time Management</label></div>
+            </div>
+            
+            <h2 style="font-size: var(--body-size); margin-top: 30px;">Other Skills (optional):</h2>
+            <input type="text" id="other-skills" name="other_skills" placeholder="Write any other skills you have">
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-section">
+            <h2>؟What do you enjoy doing in your free time</h2>
+            <div class="checkbox-grid">
+                <div class="checkbox-item"><input type="checkbox" id="photography" name="hobby_photography"><label for="photography">Photography</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="sports" name="hobby_sports"><label for="sports">Sports</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="drawing" name="hobby_drawing"><label for="drawing">Drawing/Painting</label></div>
+                
+                <div class="checkbox-item"><input type="checkbox" id="musical" name="hobby_musical"><label for="musical">Playing a Musical Instrument</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="coding" name="hobby_coding"><label for="coding">Coding/Programming</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="cleaning" name="hobby_cleaning"><label for="cleaning">Cleaning</label></div>
+                
+                <div class="checkbox-item"><input type="checkbox" id="volunteering" name="hobby_volunteering"><label for="volunteering">Volunteering</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="cooking" name="hobby_cooking"><label for="cooking">Cooking</label></div>
+                <div class="checkbox-item"><input type="checkbox" id="debating" name="hobby_debating"><label for="debating">Debating</label></div>
+            </div>
+            
+            <h2 style="font-size: var(--body-size); margin-top: 30px;">Other Hobbies (optional):</h2>
+            <input type="text" id="other-hobbies" name="other_hobbies" placeholder="Write any other hobbies you have">
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-section">
+            <h2>؟What are your future goals</h2>
+            <textarea id="future-goals" name="future_goals" placeholder="e.g., I want to work in a technology company, or I want to help solve climate change..."></textarea>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button type="submit" class="btn btn-primary">GET RECOMMENDATIONS</button>
+        </div>
+    </form>
+    
+    <script>
+    document.getElementById('major-form').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+
+        const formData = new FormData(e.target);
+        const data = {};
+
+        for (const [key, value] of formData.entries()) {
+            if (e.target.elements[key].type === 'checkbox') {
+                data[key] = e.target.elements[key].checked; 
+            } else {
+                data[key] = value;
+            }
+        }
+
+        console.log("تم تجميع بيانات النموذج بنجاح (جاهزة للإرسال):", data);
+
+        
+        fetch('http://127.0.0.1:5000/api/recommend', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data) 
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Server returned an error: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(result => {
+            console.log('تم استلام التوصيات من السيرفر:', result);
+            
+           
+            sessionStorage.setItem('majorRecommendations', JSON.stringify(result));
+
+            window.location.href = 'recommendations.html';
+        })
+        .catch(error => {
+            console.error('حدث خطأ أثناء الإرسال:', error);
+            alert('حدث خطأ أثناء الحصول على التوصيات. يرجى التأكد من تشغيل خادم Python والمحاولة لاحقاً. الخطأ: ' + error.message);
+        });
+    });
+    </script>
+</body>
+</html>
