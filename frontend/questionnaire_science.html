@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MajorMatch Questionnaire - Science Stream</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <form id="questionnaire-form">
+    <div class="main-card">
+
+      <!-- Section 1: Academic Performance -->
+      <div class="section">
+        <h2>Science Stream: Academic Performance</h2>
+
+        <div class="academic-grid">
+          <!-- Column 1 -->
+          <div class="col">
+            <div class="input-row">
+              <label>Mathematics</label>
+              <input type="text" name="grade_maths" required />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>English</label>
+              <input type="text" name="grade_english" required />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Physics</label>
+              <input type="text" name="grade_physics" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Chemistry</label>
+              <input type="text" name="grade_chemistry" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Biology</label>
+              <input type="text" name="grade_biology" />
+            </div>
+          </div>
+
+          <!-- Column 2 -->
+          <div class="col">
+            <div class="input-row">
+              <label>Islamic Studies</label>
+              <input type="text" name="grade_islam" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Arabic</label>
+              <input type="text" name="grade_arabic" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Social Studies</label>
+              <input type="text" name="grade_social" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Arts</label>
+              <input type="text" name="grade_arts" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Music</label>
+              <input type="text" name="grade_music" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Physical Education</label>
+              <input type="text" name="grade_physical_education" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label>Overall Percentage</label>
+              <input type="text" name="grade_overall" required />
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Section 2: Skills -->
+      <div class="section">
+        <h2>What are you good at?</h2>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Critical Thinking"> Critical
+            Thinking</label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Leadership"> Leadership</label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Problem Solving"> Problem
+            Solving</label>
+
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Communication"> Communication</label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Teamwork"> Teamwork</label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Interpersonal Skills"> Interpersonal
+            Skills</label>
+
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Technical Literacy"> Technical
+            Literacy</label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Creativity"> Creativity</label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Time Management"> Time
+            Management</label>
+        </div>
+
+        <label style="font-weight: 600;">Other Skills (optional):</label>
+        <input type="text" id="custom_skills" class="full-width-input" placeholder="">
+      </div>
+
+      <!-- Section 3: Hobbies -->
+      <div class="section">
+        <h2>What do you enjoy doing in your free time?</h2>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Photography"> Photography</label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Sports"> Sports</label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Drawing/Painting">
+            Drawing/Painting</label>
+
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Playing Instrument"> Playing
+            Instrument</label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Coding/Programming">
+            Coding/Programming</label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Reading"> Reading</label>
+
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Volunteering"> Volunteering</label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Cooking"> Cooking</label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Debating"> Debating</label>
+        </div>
+
+        <label style="font-weight: 600;">Other Hobbies (optional):</label>
+        <input type="text" id="custom_hobbies" class="full-width-input" placeholder="">
+      </div>
+
+      <!-- Section 4: Future Goals (Career Aspiration) -->
+      <div class="section">
+        <h2>What are your future goals?</h2>
+        <textarea name="career_aspiration" class="text-area-large"></textarea>
+      </div>
+
+      <!-- Button -->
+      <div class="btn-container">
+        <button type="submit" class="btn-primary">GET RECOMMENDATIONS</button>
+      </div>
+
+      <!-- Hidden div for errors only -->
+      <div id="results" style="display:none; color: red; text-align: center; margin-top: 10px;"></div>
+
+    </div>
+  </form>
+
+  <script>
+    const form = document.getElementById('questionnaire-form');
+    const resultsContainer = document.getElementById('results');
+
+    function parseCommaSeparated(value) {
+      return value.split(',').map((item) => item.trim()).filter((item) => item.length > 0);
+    }
+
+    function collectFormData() {
+      const data = {
+        stream: 'science',
+        grades: {
+          maths: form.grade_maths.value,
+          english: form.grade_english.value,
+          physics: form.grade_physics.value,
+          chemistry: form.grade_chemistry.value,
+          islam: form.grade_islam.value,
+          arabic: form.grade_arabic.value,
+          social: form.grade_social.value,
+          biology: form.grade_biology.value,
+          arts: form.grade_arts.value,
+          music: form.grade_music.value,
+          physical_education: form.grade_physical_education.value,
+          overall: form.grade_overall.value,
+        },
+        career_aspiration: form.career_aspiration.value,
+        skills: Array.from(form.querySelectorAll('input[name="skills"]:checked')).map((el) => el.value),
+        custom_skills: parseCommaSeparated(document.getElementById('custom_skills').value),
+        hobbies: Array.from(form.querySelectorAll('input[name="hobbies"]:checked')).map((el) => el.value),
+        custom_hobbies: parseCommaSeparated(document.getElementById('custom_hobbies').value),
+      };
+      return data;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = collectFormData();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'PROCESSING...';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api/recommend', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const text = await response.text();
+        let data;
+        try { data = JSON.parse(text); } catch { data = { error: text }; }
+
+        if (!response.ok) {
+          resultsContainer.style.display = 'block';
+          resultsContainer.textContent = `Backend error: ${data.error || text}`;
+          submitBtn.innerText = originalText;
+          submitBtn.disabled = false;
+          return;
+        }
+
+        localStorage.setItem('latestRecommendations', JSON.stringify(data));
+        window.location.href = 'recommendations.html';
+
+      } catch (err) {
+        resultsContainer.style.display = 'block';
+        resultsContainer.textContent = 'Fetch failed. Check your connection or backend server.';
+        console.error(err);
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+
+</html>

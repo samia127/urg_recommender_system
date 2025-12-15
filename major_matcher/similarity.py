@@ -8,6 +8,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+from .text_clean import clean_text, combine_and_clean
+
 
 def _row_to_text(row: pd.Series) -> str:
     parts: List[str] = []
@@ -28,17 +30,17 @@ def _row_to_text(row: pd.Series) -> str:
             parts.extend([str(item) for item in value])
         elif isinstance(value, str):
             parts.append(value)
-    return " ".join([part for part in parts if part])
+    return combine_and_clean(parts)
 
 
 def vectorize_majors(majors_df: pd.DataFrame) -> Dict[str, object]:
     """Create TF-IDF vectors for the majors corpus."""
 
     if majors_df.empty:
-        return {"vectorizer": TfidfVectorizer(stop_words="english"), "matrix": None}
+        return {"vectorizer": TfidfVectorizer(stop_words="english", ngram_range=(1, 2)), "matrix": None}
 
     text_corpus = majors_df.apply(_row_to_text, axis=1).tolist()
-    vectorizer = TfidfVectorizer(stop_words="english")
+    vectorizer = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
     majors_matrix = vectorizer.fit_transform(text_corpus)
     return {"vectorizer": vectorizer, "matrix": majors_matrix}
 
@@ -49,14 +51,16 @@ def vectorize_user_profile(user_profile: Dict[str, object], vectorizer: TfidfVec
     skills = user_profile.get("skills", []) or []
     hobbies = user_profile.get("hobbies", []) or []
     aspiration = user_profile.get("career_aspiration", "")
-    grades = user_profile.get("grades", "")
-    if isinstance(grades, dict):
-        grades_text = " ".join(f"{k}:{v}" for k, v in grades.items())
-    else:
-        grades_text = str(grades)
+    stream = user_profile.get("stream") or ""
 
-    combined = " ".join([aspiration, " ".join(skills), " ".join(hobbies), grades_text]).strip()
-    return vectorizer.transform([combined]) if combined else vectorizer.transform([""])
+    combined_text = combine_and_clean([
+        aspiration,
+        " ".join(skills),
+        " ".join(hobbies),
+        stream,
+    ])
+
+    return vectorizer.transform([combined_text]) if combined_text else vectorizer.transform([""])
 
 
 def compute_similarity_scores(user_vector, majors_matrix, majors_df: pd.DataFrame) -> List[Dict[str, object]]:

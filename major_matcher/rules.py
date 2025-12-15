@@ -2,32 +2,42 @@
 
 from __future__ import annotations
 
-import math
-import re
-from typing import Dict, List
+from typing import Dict, List, Set
 
 import pandas as pd
 
 from . import config
+from .text_clean import tokenize
 
-
-'''
-def _extract_overall_grade(grade_text: str) -> float | None:
-    """Extract a numeric overall grade percentage if present."""
-
-    numbers = re.findall(r"\d+(?:\.\d+)?", grade_text)
-    if not numbers:
-        return None
-    try:
-        return float(numbers[0])
-    except ValueError:
-        return None
-'''
 
 def _count_overlaps(user_terms: List[str], target_terms: List[str]) -> int:
     user_lower = {term.lower() for term in user_terms if term}
     target_lower = {term.lower() for term in target_terms if term}
     return len(user_lower & target_lower)
+
+
+def _root_tokens(tokens: List[str]) -> Set[str]:
+    roots: Set[str] = set()
+    for token in tokens:
+        base = token
+        for suffix in ("ing", "er", "or", "s"):
+            if base.endswith(suffix) and len(base) > len(suffix) + 2:
+                base = base[: -len(suffix)]
+                break
+        roots.add(base)
+    return roots
+
+
+def _career_overlap_score(user_text: str, options: List[str]) -> int:
+    user_tokens = _root_tokens(tokenize(user_text))
+    option_tokens: Set[str] = set()
+    for opt in options:
+        option_tokens.update(_root_tokens(tokenize(opt)))
+    # Remove extremely common tokens to avoid over-boosting
+    common_tokens = {"engineer", "engineering", "manager", "management", "data", "science"}
+    user_tokens -= common_tokens
+    option_tokens -= common_tokens
+    return len(user_tokens & option_tokens)
 
 
 def apply_rules(
@@ -39,10 +49,9 @@ def apply_rules(
     """Apply simple domain rules to the top ranked majors."""
 
     trimmed = ranked_majors[:top_n]
-    #grade_value = _extract_overall_grade(str(user_profile.get("grades", "")))
     grade_value = user_profile.get("overall_grade")
-
-    career_text = str(user_profile.get("career_aspiration", "")).lower()
+    user_grades = user_profile.get("grades") or {}
+    career_text = str(user_profile.get("career_aspiration", ""))
     user_skills = user_profile.get("skills", []) or []
 
     adjusted = []
@@ -51,18 +60,30 @@ def apply_rules(
         score = entry["score"]
         row = majors_df.iloc[idx]
 
-        min_grade = row.get("min_overall_percentage (%)")
-        if isinstance(min_grade, (int, float)) and not math.isnan(min_grade) and grade_value is not None:
-            if grade_value < float(min_grade):
-                score *= config.GRADE_PENALTY_FACTOR
+        min_grade = row.get("min_overall_percentage")
+        if min_grade is not None and not pd.isna(min_grade) and grade_value is not None:
+            try:
+                if float(grade_value) < float(min_grade):
+                    score *= config.GRADE_PENALTY_FACTOR
+            except (TypeError, ValueError):
+                pass
 
-        career_hits = 0
-        for field in ["example_career_paths", "industry_keywords"]:
-            options = row.get(field, [])
-            if isinstance(options, list):
-                career_hits += sum(1 for option in options if str(option).lower() in career_text)
+        subject_requirements = row.get("min_grade_requirements", {}) or {}
+        for subject, required_grade in subject_requirements.items():
+            user_grade = user_grades.get(subject)
+            if user_grade is None:
+                continue
+            try:
+                if float(user_grade) < float(required_grade):
+                    score *= config.SUBJECT_GRADE_PENALTY
+            except (TypeError, ValueError):
+                continue
+
+        career_hits = _career_overlap_score(
+            career_text, row.get("example_career_paths", []) + row.get("industry_keywords", [])
+        )
         if career_hits:
-            score *= config.CAREER_BOOST_FACTOR
+            score *= min(config.CAREER_BOOST_FACTOR * (1 + 0.05 * (career_hits - 1)), 1.4)
 
         overlap_sources = []
         for field in ["curriculum_keywords", "learning_style", "required_hs_subjects"]:
@@ -105,7 +126,7 @@ def build_reason(entry: Dict[str, object], user_profile: Dict[str, object], majo
     if isinstance(row, pd.Series):
         subjects = row.get("required_hs_subjects", [])
         if subjects:
-            highlights.append(f"Key subjects: {', '.join(subjects)}")
+            highlights.append(f"Key subjects: {', '.join(s.title() for s in subjects)}")
 
     if not highlights:
         highlights.append("Strong textual similarity to your interests and profile")
@@ -129,7 +150,7 @@ def generate_recommendation_report(
     confidence = 0 if max_score == 0 else min(int((top_score / max_score) * 100), 100)
 
     reasons = [
-        f"Career aspiration match: {user_profile.get('career_aspiration', 'N/A')}",
+        f"Career aspiration match: {user_profile.get('career_aspiration_text', user_profile.get('career_aspiration', 'N/A'))}",
         f"Skills highlighted: {', '.join(user_profile.get('skills', [])) or 'N/A'}",
         f"Hobbies considered: {', '.join(user_profile.get('hobbies', [])) or 'N/A'}",
     ]
