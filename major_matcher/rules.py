@@ -11,6 +11,7 @@ import pandas as pd
 from . import config
 
 
+'''
 def _extract_overall_grade(grade_text: str) -> float | None:
     """Extract a numeric overall grade percentage if present."""
 
@@ -21,7 +22,7 @@ def _extract_overall_grade(grade_text: str) -> float | None:
         return float(numbers[0])
     except ValueError:
         return None
-
+'''
 
 def _count_overlaps(user_terms: List[str], target_terms: List[str]) -> int:
     user_lower = {term.lower() for term in user_terms if term}
@@ -38,7 +39,9 @@ def apply_rules(
     """Apply simple domain rules to the top ranked majors."""
 
     trimmed = ranked_majors[:top_n]
-    grade_value = _extract_overall_grade(str(user_profile.get("grades", "")))
+    #grade_value = _extract_overall_grade(str(user_profile.get("grades", "")))
+    grade_value = user_profile.get("overall_grade")
+
     career_text = str(user_profile.get("career_aspiration", "")).lower()
     user_skills = user_profile.get("skills", []) or []
 
