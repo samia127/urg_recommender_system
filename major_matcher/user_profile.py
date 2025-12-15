@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 from typing import Dict, List
+from .subject_normalization import normalize_subject, normalize_subject_list
+
 
 
 def _combine_entries(selected: List[str] | None, custom: List[str] | None) -> List[str]:
@@ -38,7 +40,14 @@ def normalize_user_data(form_data):
 
     if isinstance(grades, dict):
         overall = grades.get("overall")
-        grades_text = "; ".join(f"{k}: {v}" for k, v in grades.items() if v)
+
+        normalized_grades = {
+            normalize_subject(k): v
+            for k, v in grades.items()
+            if k != "overall" and v not in (None, "")
+        }
+
+        grades_text = "; ".join(f"{k}: {v}" for k, v in normalized_grades.items())
     else:
         grades_text = str(grades)
 
