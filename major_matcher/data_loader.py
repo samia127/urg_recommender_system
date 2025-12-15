@@ -10,6 +10,7 @@ from typing import Dict, Iterable, List, Tuple
 import pandas as pd
 
 from . import config
+from .subject_normalization import normalize_subject, normalize_subject_list
 
 SectionData = Dict[str, Iterable[str]]
 
@@ -38,14 +39,41 @@ def _extract_section(lines: List[str], start_marker: str, stop_markers: Tuple[st
     return collected
 
 
+def _normalize_grade_requirements(value):
+    if not isinstance(value, dict):
+        return {}
+    normalized = {}
+    for key, val in value.items():
+        subject = normalize_subject(key)
+        grade_val = None
+        try:
+            grade_val = float(val)
+        except (TypeError, ValueError):
+            if isinstance(val, str):
+                match = re.search(r"\d+(?:\.\d+)?", val)
+                if match:
+                    grade_val = float(match.group(0))
+        if grade_val is None:
+            continue
+        normalized[subject] = grade_val
+    return normalized
+
+
+def _load_candidates(path: Path) -> Path:
+    normalized_path = path.with_name(f"{path.stem}.normalized{path.suffix}")
+    if normalized_path.exists():
+        return normalized_path
+    return path
+
+
 def load_majors_data(json_path: str | Path | None = None) -> pd.DataFrame:
     """Load the majors JSON into a DataFrame, handling edge cases gracefully."""
 
-    path = Path(json_path) if json_path else config.MAJORS_PATH
+    base_path = Path(json_path) if json_path else config.MAJORS_PATH
+    path = _load_candidates(base_path)
     if not path.exists():
-        # Fallback to default location if a custom path was provided but missing
         if json_path:
-            path = config.MAJORS_PATH
+            path = _load_candidates(config.MAJORS_PATH)
         if not path.exists():
             return pd.DataFrame()
 
@@ -70,6 +98,8 @@ def load_majors_data(json_path: str | Path | None = None) -> pd.DataFrame:
             frame[field] = [[] for _ in range(len(frame))]
         else:
             frame[field] = frame[field].apply(lambda v: v if isinstance(v, list) else [])
+        if field == "required_hs_subjects":
+            frame[field] = frame[field].apply(normalize_subject_list)
 
     # Ensure text-friendly columns exist for later concatenation
     for field in ["major_name", "faculty", "degree_type"]:
@@ -77,12 +107,21 @@ def load_majors_data(json_path: str | Path | None = None) -> pd.DataFrame:
             frame[field] = ""
         frame[field] = frame[field].fillna("")
 
-    numeric_fields = ["min_overall_percentage (%)"]
-    for field in numeric_fields:
-        if field in frame.columns:
-            frame[field] = pd.to_numeric(frame[field], errors="coerce")
-        else:
-            frame[field] = float("nan")
+    # Normalize overall percentage
+    overall_col = "min_overall_percentage"
+    percent_col = "min_overall_percentage (%)"
+    if overall_col not in frame.columns:
+        frame[overall_col] = float("nan")
+    if percent_col in frame.columns:
+        frame[overall_col] = frame[overall_col].fillna(frame[percent_col])
+    frame[overall_col] = pd.to_numeric(frame[overall_col], errors="coerce")
+
+    # Normalize per-subject requirements
+    if "min_grade_requirements" not in frame.columns:
+        frame["min_grade_requirements"] = [{} for _ in range(len(frame))]
+    frame["min_grade_requirements"] = frame["min_grade_requirements"].apply(
+        _normalize_grade_requirements
+    )
 
     return frame
 

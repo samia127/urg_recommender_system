@@ -7,15 +7,16 @@ A lightweight recommendation engine to match students with university majors usi
 - `data/context.txt`: background text describing the Omani grading context plus skills, hobbies, and career examples.
 - `major_matcher/`: Python package for loading data, computing similarity, applying rules, and generating recommendations.
 - `backend/app.py`: Flask server exposing `POST /api/recommend` for browser clients.
-- `frontend/questionnaire.html`: Collects grades, skills, hobbies, and career aspirations then calls the backend.
+- `frontend/index.html`: Landing page to choose between the Science and Literary questionnaires.
+- `frontend/questionnaire_science.html` / `frontend/questionnaire_lit.html`: Collect stream-specific grades, skills, hobbies, and career aspirations then call the backend.
 - `frontend/recommendations.html`: Displays the latest recommendations saved from the questionnaire page.
 - `major_recommender_main.ipynb` and `major_recommender_testing.ipynb`: Original Colab-friendly notebooks for exploration and testing.
 
 ## Quickstart
 1. Install dependencies: `pip install -r requirements.txt`.
 2. From the project root, start the backend: `python backend/app.py` (runs on port 5000).
-3. Open `frontend/questionnaire.html` in your browser (file:// or a simple static server).
-4. Fill in grades, skills, hobbies, and career aspiration, then submit. The page will POST to `http://localhost:5000/api/recommend` and render results inline. It also stores the response so `frontend/recommendations.html` can present the same results.
+3. Open `frontend/index.html` in your browser (file:// or a simple static server) and pick **Science Stream** or **Literary Stream**.
+4. Fill in stream-appropriate grades, skills, hobbies, and career aspiration, then submit. The page will POST to `http://localhost:5000/api/recommend` and render results inline. It also stores the response so `frontend/recommendations.html` can present the same results.
 
 ## Python package usage
 ```python
@@ -30,6 +31,15 @@ raw_form = {
 user_profile = normalize_user_data(raw_form)
 recommendations = recommend(user_profile)
 ```
+
+## Data cleanup helper
+The `scripts/normalize_majors_subjects.py` script normalizes subject names inside `data/majors.json` and writes `data/majors.normalized.json`. Run it whenever the majors dataset changes:
+
+```
+python scripts/normalize_majors_subjects.py
+```
+
+`load_majors_data` automatically prefers the normalized file if present.
 
 ## Notes
 - Data paths are relative to the repository root; ensure `data/majors.json` and `data/context.txt` remain in place.

@@ -12,13 +12,18 @@
         <p class="index-sub">
             Answer a few questions and get personalized major recommendations
         </p>
-        <a href="questionnaire.html" class="btn-primary">GET STARTED</a>
+        <div class="btn-container" style="justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="questionnaire_science.html" class="btn-primary">Science Stream</a>
+            <a href="questionnaire_lit.html" class="btn-primary">Literary Stream</a>
+        </div>
     </div>
 
     <script>
-        // Simple console log as requested in original code
-        document.querySelector('.btn-primary').addEventListener('click', function(e) {
-            console.log("Starting the questionnaire...");
+        const buttons = document.querySelectorAll('.btn-primary');
+        buttons.forEach((btn) => {
+            btn.addEventListener('click', function () {
+                console.log(`Starting the ${this.textContent.trim()} questionnaire...`);
+            });
         });
     </script>
 </body>
