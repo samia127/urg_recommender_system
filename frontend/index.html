@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-title-key="title">Majors recommender system</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="translations.js"></script>
+</head>
+<body>
+    <div class="main-card" style="text-align: center;">
+        <!-- Language Toggle -->
+        <div style="position: absolute; top: 20px; right: 20px;">
+            <button id="language-toggle" onclick="LanguageManager.toggle()" class="btn-primary" style="padding: 8px 20px; font-size: 12px;">
+                العربية
+            </button>
+        </div>
+        
+        <h2 class="index-header" data-translate="findMajor">FIND YOUR UNIVERSITY MAJOR</h2>
+        <p class="index-sub" data-translate="subtitle">
+            Answer a few questions and get personalized major recommendations
+        </p>
+        <div class="btn-container" style="justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="questionnaire_science.html" class="btn-primary" data-translate="scienceStream">Science Stream</a>
+            <a href="questionnaire_lit.html" class="btn-primary" data-translate="literaryStream">Literary Stream</a>
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.btn-primary');
+        buttons.forEach((btn) => {
+            btn.addEventListener('click', function () {
+                console.log(`Starting the ${this.textContent.trim()} questionnaire...`);
+            });
+        });
+    </script>
+</body>
+</html>

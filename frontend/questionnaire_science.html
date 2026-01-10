@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-title-key="title">MajorMatch Questionnaire - Science Stream</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="translations.js"></script>
+</head>
+
+<body>
+
+  <form id="questionnaire-form">
+    <div class="main-card">
+      <!-- Language Toggle -->
+      <div style="position: absolute; top: 20px; right: 20px;">
+        <button id="language-toggle" onclick="LanguageManager.toggle()" class="btn-primary" style="padding: 8px 20px; font-size: 12px;">
+          العربية
+        </button>
+      </div>
+
+      <!-- Section 1: Academic Performance -->
+      <div class="section">
+        <h2 data-translate="scienceStreamTitle">Science Stream: Academic Performance</h2>
+
+        <div class="academic-grid">
+          <!-- Column 1 -->
+          <div class="col">
+            <div class="input-row">
+              <label data-translate="mathematics">Mathematics</label>
+              <input type="text" name="grade_maths" required />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="english">English</label>
+              <input type="text" name="grade_english" required />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="physics">Physics</label>
+              <input type="text" name="grade_physics" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="chemistry">Chemistry</label>
+              <input type="text" name="grade_chemistry" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="biology">Biology</label>
+              <input type="text" name="grade_biology" />
+            </div>
+          </div>
+
+          <!-- Column 2 -->
+          <div class="col">
+            <div class="input-row">
+              <label data-translate="islamicStudies">Islamic Studies</label>
+              <input type="text" name="grade_islam" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="arabic">Arabic</label>
+              <input type="text" name="grade_arabic" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="socialStudies">Social Studies</label>
+              <input type="text" name="grade_social" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="arts">Arts</label>
+              <input type="text" name="grade_arts" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="music">Music</label>
+              <input type="text" name="grade_music" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="physicalEducation">Physical Education</label>
+              <input type="text" name="grade_physical_education" />
+            </div>
+            <br>
+
+            <div class="input-row">
+              <label data-translate="overallPercentage">Overall Percentage</label>
+              <input type="text" name="grade_overall" required />
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Section 2: Skills -->
+      <div class="section">
+        <h2 data-translate="whatAreYouGoodAt">What are you good at?</h2>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Critical Thinking"> <span data-translate="criticalThinking">Critical Thinking</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Leadership"> <span data-translate="leadership">Leadership</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Problem Solving"> <span data-translate="problemSolving">Problem Solving</span></label>
+
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Communication"> <span data-translate="communication">Communication</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Teamwork"> <span data-translate="teamwork">Teamwork</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Interpersonal Skills"> <span data-translate="interpersonalSkills">Interpersonal Skills</span></label>
+
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Technical Literacy"> <span data-translate="technicalLiteracy">Technical Literacy</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Creativity"> <span data-translate="creativity">Creativity</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="skills" value="Time Management"> <span data-translate="timeManagement">Time Management</span></label>
+        </div>
+
+        <label style="font-weight: 600;" data-translate="otherSkills">Other Skills (optional):</label>
+        <input type="text" id="custom_skills" class="full-width-input" placeholder="">
+      </div>
+
+      <!-- Section 3: Hobbies -->
+      <div class="section">
+        <h2 data-translate="whatDoYouEnjoy">What do you enjoy doing in your free time?</h2>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Photography"> <span data-translate="photography">Photography</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Sports"> <span data-translate="sports">Sports</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Drawing/Painting">
+            <span data-translate="drawingPainting">Drawing/Painting</span></label>
+
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Playing Instrument"> <span data-translate="playingInstrument">Playing Instrument</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Coding/Programming">
+            <span data-translate="codingProgramming">Coding/Programming</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Reading"> <span data-translate="reading">Reading</span></label>
+
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Volunteering"> <span data-translate="volunteering">Volunteering</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Cooking"> <span data-translate="cooking">Cooking</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="hobbies" value="Debating"> <span data-translate="debating">Debating</span></label>
+        </div>
+
+        <label style="font-weight: 600;" data-translate="otherHobbies">Other Hobbies (optional):</label>
+        <input type="text" id="custom_hobbies" class="full-width-input" placeholder="">
+      </div>
+
+      <!-- Section 4: Future Goals (Career Aspiration) -->
+      <div class="section">
+        <h2 data-translate="futureGoals">What are your future goals?</h2>
+        <textarea name="career_aspiration" class="text-area-large"></textarea>
+      </div>
+
+      <!-- Button -->
+      <div class="btn-container">
+        <button type="submit" class="btn-primary" data-translate="getRecommendations">GET RECOMMENDATIONS</button>
+      </div>
+
+      <!-- Hidden div for errors only -->
+      <div id="results" style="display:none; color: red; text-align: center; margin-top: 10px;"></div>
+
+    </div>
+  </form>
+
+  <script>
+    const form = document.getElementById('questionnaire-form');
+    const resultsContainer = document.getElementById('results');
+
+    function parseCommaSeparated(value) {
+      return value.split(',').map((item) => item.trim()).filter((item) => item.length > 0);
+    }
+
+    function collectFormData() {
+      const data = {
+        stream: 'science',
+        grades: {
+          maths: form.grade_maths.value,
+          english: form.grade_english.value,
+          physics: form.grade_physics.value,
+          chemistry: form.grade_chemistry.value,
+          islam: form.grade_islam.value,
+          arabic: form.grade_arabic.value,
+          social: form.grade_social.value,
+          biology: form.grade_biology.value,
+          arts: form.grade_arts.value,
+          music: form.grade_music.value,
+          physical_education: form.grade_physical_education.value,
+          overall: form.grade_overall.value,
+        },
+        career_aspiration: form.career_aspiration.value,
+        skills: Array.from(form.querySelectorAll('input[name="skills"]:checked')).map((el) => el.value),
+        custom_skills: parseCommaSeparated(document.getElementById('custom_skills').value),
+        hobbies: Array.from(form.querySelectorAll('input[name="hobbies"]:checked')).map((el) => el.value),
+        custom_hobbies: parseCommaSeparated(document.getElementById('custom_hobbies').value),
+      };
+      return data;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = collectFormData();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = LanguageManager.t('processing');
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api/recommend', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const text = await response.text();
+        let data;
+        try { data = JSON.parse(text); } catch { data = { error: text }; }
+
+        if (!response.ok) {
+          resultsContainer.style.display = 'block';
+          resultsContainer.textContent = `${LanguageManager.t('backendError')}: ${data.error || text}`;
+          submitBtn.innerText = originalText;
+          submitBtn.disabled = false;
+          return;
+        }
+
+        localStorage.setItem('latestRecommendations', JSON.stringify(data));
+        window.location.href = 'recommendations.html';
+
+      } catch (err) {
+        resultsContainer.style.display = 'block';
+        resultsContainer.textContent = LanguageManager.t('fetchFailed');
+        console.error(err);
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+
+</html>

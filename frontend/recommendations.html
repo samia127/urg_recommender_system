@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-title-key="title">MajorMatch Recommendations</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="translations.js"></script>
+</head>
+<body>
+
+  <div class="main-card">
+    <!-- Language Toggle -->
+    <div style="position: absolute; top: 20px; right: 20px;">
+      <button id="language-toggle" onclick="LanguageManager.toggle()" class="btn-primary" style="padding: 8px 20px; font-size: 12px;">
+        العربية
+      </button>
+    </div>
+    
+    <h1 data-translate="yourRecommendedMajors">Your Recommended Majors</h1>
+    <p style="text-align: center; margin-bottom: 30px;" data-translate="basedOnData">
+        Based on the data you provided in the questionnaire.
+    </p>
+
+    <!-- Container for dynamic results -->
+    <div id="recommendations-container" class="major-card-container"></div>
+
+    <!-- Retake Button -->
+    <div class="btn-container" style="margin-top: 40px;">
+        <a href="index.html" class="btn-primary" data-translate="retakeQuestionnaire">Retake Questionnaire</a>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('recommendations-container');
+    
+    // IMPORTANT: This key must match what was set in questionnaire.html
+    const raw = localStorage.getItem('latestRecommendations');
+
+    if (!raw) {
+      container.innerHTML = `<p style="text-align:center; color: #666;">${LanguageManager.t('noRecommendations')}</p>`;
+    } else {
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch (e) {
+        container.innerHTML = `<p style="text-align:center; color: red;">${LanguageManager.t('errorLoading')}</p>`;
+      }
+
+      if (data) {
+        const { top_recommendation, alternatives, message } = data;
+
+        // 1. Check if backend returned a specific message instead of data
+        if (!top_recommendation) {
+          container.innerHTML = `<p style="text-align:center;">${message || LanguageManager.t('noRecommendationFound')}</p>`;
+        } else {
+          
+          // --- RENDER TOP RECOMMENDATION ---
+          const topCard = document.createElement('div');
+          topCard.className = 'major-card';
+          // Add specific styling to highlight the top choice
+          topCard.style.backgroundColor = '#f0f8ff'; 
+          if (LanguageManager.currentLang === 'ar') {
+            topCard.style.borderLeftColor = '#4A90E2';
+            topCard.style.borderLeftWidth = '5px';
+            topCard.style.borderRightWidth = '0';
+          } else {
+            topCard.style.borderRightColor = '#4A90E2';
+            topCard.style.borderRightWidth = '5px';
+          }
+          
+          const topMatchText = LanguageManager.t('topMatch');
+          const whyText = LanguageManager.t('why');
+          const defaultReason = LanguageManager.t('strongSimilarity');
+          
+          const reasonText = top_recommendation.reason || defaultReason;
+          const translatedReason = LanguageManager.translateReason(reasonText);
+          
+          topCard.innerHTML = `
+            <h2 style="margin-bottom: 10px; color: #4A90E2;">★ ${topMatchText}: ${top_recommendation.major_name}</h2>
+            <p><strong>${whyText}</strong> ${translatedReason}</p>
+          `;
+          container.appendChild(topCard);
+
+          // --- RENDER HEADER FOR ALTERNATIVES ---
+          if (alternatives && alternatives.length > 0) {
+              const altHeader = document.createElement('h3');
+              altHeader.innerText = LanguageManager.t('otherStrongOptions');
+              altHeader.style.marginTop = "30px";
+              altHeader.style.marginBottom = "15px";
+              altHeader.style.color = "#333";
+              altHeader.style.fontFamily = "var(--font-heading)";
+              container.appendChild(altHeader);
+          }
+
+          // --- RENDER ALTERNATIVES ---
+          (alternatives || []).forEach((alt) => {
+            const card = document.createElement('div');
+            card.className = 'major-card';
+            // Styling for alternatives (white bg, grey accent)
+            card.style.background = '#FFFFFF';
+            card.style.border = '1px solid #E0E0E0';
+            if (LanguageManager.currentLang === 'ar') {
+              card.style.borderLeft = '5px solid #B0C4DE';
+              card.style.borderRight = '1px solid #E0E0E0';
+            } else {
+              card.style.borderRight = '5px solid #B0C4DE';
+            }
+
+            const matchScoreText = LanguageManager.t('matchScore');
+            const defaultAltReason = LanguageManager.t('strongSimilarity');
+            const altReasonText = alt.reason || defaultAltReason;
+            const translatedAltReason = LanguageManager.translateReason(altReasonText);
+
+            card.innerHTML = `
+              <h2 style="font-size: 18px; color: #333;">${alt.major_name}</h2>
+              <p style="font-size: 14px; margin-bottom: 5px;">
+                <strong>${matchScoreText}:</strong> ${(alt.score * 100).toFixed(0)}%
+              </p>
+              <p style="font-size: 14px; color: #666;">
+                ${translatedAltReason}
+              </p>
+            `;
+            container.appendChild(card);
+          });
+
+          // Handle case where alternatives array exists but is empty
+          if (!alternatives || alternatives.length === 0) {
+            const empty = document.createElement('p');
+            empty.textContent = LanguageManager.t('noOtherMatches');
+            empty.style.textAlign = 'center';
+            empty.style.fontStyle = 'italic';
+            container.appendChild(empty);
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,847 @@
+[
+  {
+    "major_id": "GUTECH-CS",
+    "major_name": "Bachelor of Science in Computer Science",
+    "university_name": "GUTech",
+    "faculty": "department of computer science",
+    "degree_type": "Bsc",
+    "duration": 4,
+    "required_hs_subjects": ["Advanced maths", "English"],
+    "min_grade_requirements (%)": [75, 75],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "support specialist",
+      "IT project manager",
+      "logistics",
+      "system analysis",
+      "system development",
+      "software and web design"
+    ],
+    "curriculum_keywords": [ "Computer Architecture", 
+      "Calculus", 
+      "Data Structures", 
+      "Efficient Algorithms", 
+      "Database Systems", 
+      "Probability and Statistics", 
+      "Introduction to Information Security", 
+      "Computer Networks", 
+      "Internet of Things", "Data Mining Algorithms"],
+    "industry_keywords": [
+      "Software developer",
+      "IT engineer",
+      "Education",
+      "System Analyst"
+    ],
+    "learning_style": ["theory", "practical"]
+  },
+  {
+    "major_id": "SQU-BIO",
+    "major_name": "Bachelor of Science in biology",
+    "university_name": "Sultan Qaboos University",
+    "faculty": "College of science",
+    "degree_type": "Bsc",
+    "duration": 4,
+    "required_hs_subjects": ["Core maths", "English", "Biology", "Physics", "Chemistry"],
+    "min_grade_requirements (%)": [65, 65, 65, 65, 65],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Teaching",
+      "biotechnology labs",
+      "research institutions",
+      "healthcare testing labs",
+      "environmental agencies"
+    ],
+    "curriculum_keywords": ["General Biology", "bacteriology", "genetics", "microbiology", "molecular biology"],
+    "industry_keywords": [
+      "Education",
+      "Biotechnology",
+      "Pharmaceuticals",
+      "Environmental Science",
+      "Healthcare"
+    ],
+    "learning_style": ["Practical", "research (lab-heavy with a final-year project)"]
+  },
+  {
+    "major_id": "SU-ENG",
+    "major_name": "Bachelor of English Language Education",
+    "university_name": "Sohar University",
+    "faculty": "Education and Arts",
+    "degree_type": "Bsc",
+    "duration": 4,
+    "required_hs_subjects": ["English", "Arabic", "Islamic studies"],
+    "min_grade_requirements (%)": [90, 65, 65],
+    "min_overall_percentage (%)": 50,
+    "example_career_paths": ["teaching", "translation", "publishing"],
+    "curriculum_keywords": [
+      "Intercultural Communication",
+      "English Literary texts",
+      "education technology",
+      "syntax",
+      "teaching",
+      "general translation",
+      "modern linguistics",
+      "stylistics"
+    ],
+    "industry_keywords": ["Education", "Curriculum Development", "Educational Publishing"],
+    "learning_style": ["teaching", "learning", "assessment"]
+  },
+  {
+    "major_id": "GUTECH-AI",
+    "major_name": "Bachelor of science in Artificial Intelligence",
+    "university_name": "GUTech",
+    "faculty": "department of computer science",
+    "degree_type": "Bsc",
+    "duration": 4,
+    "required_hs_subjects": ["Advanced maths", "English"],
+    "min_grade_requirements (%)": [75, 75],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "ai research scientist",
+      "ai chatbot developer",
+      "Knowledge engineer",
+      "Intelligent systems specialist",
+      "Expert systems developer",
+      "Systems analyst",
+      "Systems programmer",
+      "Systems designer",
+      "Software developer",
+      "Software consultant"
+    ],
+    "curriculum_keywords": ["Efficient Algorithms", "Web Design and Development", "Operating Systems", "Linear Algebra", "Calculus", 
+      "Numerical Computation", "Decision Theory", "Cognitive Computing", "Decision Making for Autonomous Systems", 
+      "Introduction to Natural Language Processing", "Cryptography and Blockchain", "Knowledge Engineering in AI" ],
+    "industry_keywords": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Expert Systems",
+      "Data Science",
+      "Natural Language Processing",
+      "Robotics",
+      "Knowledge Management",
+      "Information Technology"
+    ],
+    "learning_style": ["theory", "practical"]
+  },
+  {
+    "major_id": "SQU-CE",
+    "major_name": "bachelor of science in civil engineering",
+    "university_name": "Sultan Qaboos University",
+    "faculty": "College of Engineering",
+    "degree_type": "Bsc",
+    "duration": 4,
+    "required_hs_subjects": ["Pure Mathematics", "Chemistry", "Physics", "Core English Language"],
+    "min_grade_requirements (%)": [65, 65, 65, 65],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "physical design engineer",
+      "Structural Engineer",
+      "Project Manager",
+      "Geotechnical Engineer",
+      "Construction Manager",
+      "Environmental Engineer"
+    ],
+    "curriculum_keywords": [
+      "Concrete Design",
+      "Construction Management",
+      "Calculus",
+      "Linear Algebra & Multi. Var. Calculus for Engineers"
+    ],
+    "industry_keywords": [
+      "Civil Engineering",
+      "Structural Engineering",
+      "Geotechnical Engineering",
+      "Construction Industry",
+      "Infrastructure Development",
+      "Transportation Engineering",
+      "Environmental Engineering"
+    ],
+    "learning_style": ["theory", "practical", "research"]
+  },
+  {
+    "major_id": "GUTECH-ME",
+    "major_name": "Bachelor of Engineering in Mechanical Engineering",
+    "university_name": "GUTech",
+    "faculty": "Faculty of Engineering",
+    "degree_type": "BEng",
+    "duration": 4,
+    "required_hs_subjects": ["Advanced Maths", "Physics", "English"],
+    "min_grade_requirements (%)": [75, 60, 75],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Mechanical Engineer",
+      "Design Engineer",
+      "Production Engineer",
+      "HVAC Engineer",
+      "Automotive Engineer",
+      "R&D Engineer"
+    ],
+    "curriculum_keywords": [
+      "Thermodynamics",
+      "Fluid Mechanics",
+      "Strength of Materials",
+      "CAD",
+      "Robotics",
+      "Heat Transfer",
+      "Machine Design"
+    ],
+    "industry_keywords": ["Automotive", "Aerospace", "Manufacturing", "Energy", "Oil & Gas", "Robotics"],
+    "learning_style": ["Theory", "Practical (labs, design projects)"]
+  },
+  {
+    "major_id": "UN-AE",
+    "major_name": "Bachelor of Education in Art Education",
+    "university_name": "University of Nizwa",
+    "faculty": "College of Arts & Sciences",
+    "degree_type": "BEd",
+    "duration": 4,
+    "required_hs_subjects": ["Arabic", "English", "Fine Arts"],
+    "min_grade_requirements (%)": [80, 80, 80],
+    "min_overall_percentage (%)": 80,
+    "example_career_paths": [
+      "Art Teacher",
+      "Artist",
+      "Designer",
+      "Digital Artist",
+      "Workshop Trainer",
+      "Exhibition Organizer"
+    ],
+    "curriculum_keywords": [
+      "Fundamentals of Art",
+      "Drawing & Composition",
+      "Color Theory",
+      "Art History",
+      "Visual Arts Techniques",
+      "Sculpture",
+      "Pedagogy of Art",
+      "Teaching Skills",
+      "Senior Project"
+    ],
+    "industry_keywords": [
+      "Education",
+      "Visual Arts",
+      "Galleries",
+      "Creative Industries",
+      "Cultural Institutions",
+      "Art Therapy"
+    ],
+    "learning_style": ["Practical", "Research", "Applied (workshops, labs, teaching practice, exhibitions)"]
+  },
+  {
+    "major_id": "GUTECH-GEO",
+    "major_name": "Bachelor of Engineering in Geoengineering",
+    "university_name": "GUTech",
+    "faculty": "Faculty of Engineering",
+    "degree_type": "BEng",
+    "duration": 4,
+    "required_hs_subjects": ["Advanced Mathematics", "Physics", "English"],
+    "min_grade_requirements (%)": [75, 60, 75],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Geotechnical Engineer",
+      "Geological Consultant",
+      "Mining Engineer",
+      "Environmental Engineer",
+      "Hydrogeologist",
+      "Oil & Gas Engineer"
+    ],
+    "curriculum_keywords": [
+      "Geology",
+      "Mineral Resources",
+      "Rock Mechanics",
+      "Soil Mechanics",
+      "Hydrology",
+      "Surveying",
+      "GIS",
+      "Structural Geology"
+    ],
+    "industry_keywords": [
+      "Oil & Gas",
+      "Mining",
+      "Geotechnical Engineering",
+      "Environmental Engineering",
+      "Hydrogeology",
+      "Infrastructure Development"
+    ],
+    "learning_style": ["Theory", "Practical (labs, fieldwork, projects)"]
+  },
+  {
+    "major_id": "GUTECH-IBSM",
+    "major_name": "Bachelor of Science in International Business and Service Management",
+    "university_name": "GUTech",
+    "faculty": "Faculty of Business and Management",
+    "degree_type": "BSc",
+    "duration": 4,
+    "required_hs_subjects": ["Business Studies", "Economics", "English"],
+    "min_grade_requirements (%)": [75, 60, 75],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Financial trader",
+      "International Business Manager",
+      "Service Operations Manager",
+      "Marketing Strategist",
+      "Supply Chain Analyst",
+      "Business Consultant"
+    ],
+    "curriculum_keywords": [
+      "International Business",
+      "Service Management",
+      "Marketing",
+      "Economics",
+      "Strategic Management",
+      "Cross-Cultural Communication"
+    ],
+    "industry_keywords": [
+      "International Trade",
+      "Service Industry",
+      "Marketing",
+      "Consulting",
+      "Supply Chain"
+    ],
+    "learning_style": ["Theory", "Practical (case studies, internships, group projects)"]
+  },
+  {
+    "major_id": "GUTECH-UPAD",
+    "major_name": "Bachelor of Science in Urban Planning and Architectural Design",
+    "university_name": "GUTech",
+    "faculty": "Faculty of Architecture and Planning",
+    "degree_type": "BSc",
+    "duration": 4,
+    "required_hs_subjects": ["Mathematics", "Physics", "English"],
+    "min_grade_requirements (%)": [75, 60, 75],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Urban Planner",
+      "Architectural Designer",
+      "Sustainability Consultant",
+      "Landscape Architect",
+      "City Development Specialist"
+    ],
+    "curriculum_keywords": [
+      "Urban Design",
+      "Architectural Theory",
+      "Environmental Sustainability",
+      "Building Information Modeling (BIM)",
+      "Urban Policy",
+      "Infrastructure Planning"
+    ],
+    "industry_keywords": [
+      "Urban Development",
+      "Architecture",
+      "Environmental Planning",
+      "Construction",
+      "Real Estate Development"
+    ],
+    "learning_style": ["Theory", "Practical (design studios, site visits, project-based learning)"]
+  },
+  {
+    "major_id": "SQU-MS",
+    "major_name": "Bachelor in Media Studies",
+    "university_name": "Sultan Qaboos University",
+    "faculty": "College of Arts and Social Sciences",
+    "degree_type": "BA",
+    "duration": 4,
+    "required_hs_subjects": ["Media Studies", "English"],
+    "min_grade_requirements (%)": [75, 60],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Journalist",
+      "Public Relations Specialist",
+      "Media Analyst",
+      "Content Creator",
+      "Broadcast Producer"
+    ],
+    "curriculum_keywords": [
+      "Media Ethics",
+      "Journalism",
+      "Digital Media",
+      "Broadcasting",
+      "Public Relations",
+      "Media Law"
+    ],
+    "industry_keywords": [
+      "Media",
+      "Broadcasting",
+      "Public Relations",
+      "Digital Marketing",
+      "Journalism"
+    ],
+    "learning_style": ["Theory", "Practical (internships, media projects, workshops)"]
+  },
+  {
+    "major_id": "SQU-TOUR",
+    "major_name": "Bachelor in Tourism",
+    "university_name": "Sultan Qaboos University",
+    "faculty": "College of Arts and Social Sciences",
+    "degree_type": "BA",
+    "duration": 4,
+    "required_hs_subjects": ["Tourism Studies", "English"],
+    "min_grade_requirements (%)": [75, 60],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Communications Specialist",
+      "Tourism Manager",
+      "Hospitality Manager",
+      "Travel Consultant",
+      "Event Coordinator",
+      "Tourism Policy Analyst"
+    ],
+    "curriculum_keywords": [
+      "Tourism Management",
+      "Hospitality Management",
+      "Sustainable Tourism",
+      "Cultural Heritage",
+      "Tourism Marketing",
+      "Destination Management"
+    ],
+    "industry_keywords": [
+      "Tourism",
+      "Hospitality",
+      "Event Management",
+      "Travel",
+      "Destination Marketing"
+    ],
+    "learning_style": ["Theory", "Practical (internships, field trips, case studies)"]
+  },
+  {
+    "major_id": "SQU-ALS",
+    "major_name": "Bachelor in Arabic Language Studies",
+    "university_name": "Sultan Qaboos University",
+    "faculty": "College of Arts and Social Sciences",
+    "degree_type": "BA",
+    "duration": 4,
+    "required_hs_subjects": ["Arabic Language", "English"],
+    "min_grade_requirements (%)": [75, 60],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Arabic Language Teacher",
+      "Translator",
+      "Editor",
+      "Linguist",
+      "Cultural Consultant"
+    ],
+    "curriculum_keywords": [
+      "Arabic Linguistics",
+      "Arabic Literature",
+      "Syntax",
+      "Semantics",
+      "Phonetics",
+      "Translation Studies"
+    ],
+    "industry_keywords": [
+      "Education",
+      "Translation",
+      "Publishing",
+      "Media",
+      "Cultural Institutions"
+    ],
+    "learning_style": ["Theory", "Practical (language labs, translation exercises, literary analysis)"]
+  },
+  {
+    "major_id": "SQU-PE",
+    "major_name": "Bachelor of Physical Education",
+    "university_name": "Sultan Qaboos University",
+    "faculty": "College of Education",
+    "degree_type": "BEd",
+    "duration": 4,
+    "required_hs_subjects": ["Physical Education", "Biology", "English"],
+    "min_grade_requirements (%)": [75, 60, 75],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Physical Education Teacher",
+      "Sports Coach",
+      "Fitness Trainer",
+      "Sports Administrator",
+      "Recreation Director"
+    ],
+    "curriculum_keywords": [
+      "Sport Physiology",
+      "Kinesiology",
+      "Psychology",
+      "Sport Administration",
+      "Teaching Methods",
+      "Coaching Principles"
+    ],
+    "industry_keywords": [
+      "Education",
+      "Sports",
+      "Recreation",
+      "Fitness",
+      "Health Promotion"
+    ],
+    "learning_style": ["Theory", "Practical (sports practice, coaching, fitness assessments)"]
+  },
+  {
+    "major_id": "SQU-BTL",
+    "major_name": "Bachelor of Science in Biotechnology",
+    "university_name": "Sultan Qaboos University",
+    "faculty": "College of Science",
+    "degree_type": "BSc",
+    "duration": 4,
+    "required_hs_subjects": ["Biology", "Chemistry", "English"],
+    "min_grade_requirements (%)": [70, 65, 65],
+    "min_overall_percentage (%)": 70,
+    "example_career_paths": [
+      "Biotechnologist",
+      "Laboratory Researcher",
+      "Pharmaceutical Scientist",
+      "Quality Control Analyst",
+      "Environmental Biologist"
+    ],
+    "curriculum_keywords": [
+      "Molecular Biology",
+      "Genetics",
+      "Microbiology",
+      "Biochemistry",
+      "Bioinformatics",
+      "Cell Biology",
+      "Biotechnology Techniques"
+    ],
+    "industry_keywords": [
+      "Biotechnology",
+      "Pharmaceuticals",
+      "Healthcare",
+      "Environmental Science",
+      "Research & Development"
+    ],
+    "learning_style": ["Theory", "Practical (labs, research projects, internships)"]
+  },
+  {
+    "major_id": "SU-ALE",
+    "major_name": "Bachelor of Arabic Language Education",
+    "university_name": "Sohar University",
+    "faculty": "College of Education and Arts",
+    "degree_type": "BEd",
+    "duration": 4,
+    "required_hs_subjects": ["Arabic", "English", "Islamic Studies"],
+    "min_grade_requirements (%)": [80, 75, 70],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Arabic Language Teacher",
+      "Curriculum Developer",
+      "Linguist",
+      "Translator",
+      "Educational Consultant"
+    ],
+    "curriculum_keywords": [
+      "Arabic Grammar",
+      "Arabic Literature",
+      "Teaching Methods",
+      "Pedagogy",
+      "Syntax",
+      "Translation",
+      "Literary Analysis"
+    ],
+    "industry_keywords": [
+      "Education",
+      "Curriculum Development",
+      "Translation",
+      "Publishing"
+    ],
+    "learning_style": ["Theory", "Practical (teaching practice, lesson planning, workshops)"]
+  },
+  {
+    "major_id": "SU-ME",
+    "major_name": "Bachelor of Music Education",
+    "university_name": "Sohar University",
+    "faculty": "College of Education and Arts",
+    "degree_type": "BEd",
+    "duration": 4,
+    "required_hs_subjects": ["Music", "English", "Arabic"],
+    "min_grade_requirements (%)": [80, 70, 70],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Music Teacher",
+      "Choir Conductor",
+      "Music Therapist",
+      "Composer",
+      "Instrument Instructor"
+    ],
+    "curriculum_keywords": [
+      "Music Theory",
+      "Music History",
+      "Instrumental Practice",
+      "Conducting",
+      "Pedagogy",
+      "Composition",
+      "Performance"
+    ],
+    "industry_keywords": [
+      "Education",
+      "Music Performance",
+      "Arts",
+      "Cultural Institutions",
+      "Therapy"
+    ],
+    "learning_style": ["Practical", "Theory (instrument practice, teaching labs, performances)"]
+  },
+  {
+    "major_id": "SU-TP",
+    "major_name": "Diploma in Teacher Preparation",
+    "university_name": "Sohar University",
+    "faculty": "College of Education and Arts",
+    "degree_type": "Diploma",
+    "duration": 2,
+    "required_hs_subjects": ["English", "Arabic", "Social Studies"],
+    "min_grade_requirements (%)": [70, 70, 65],
+    "min_overall_percentage (%)": 70,
+    "example_career_paths": [
+      "Classroom Teacher",
+      "Teaching Assistant",
+      "Education Coordinator",
+      "Curriculum Support Officer"
+    ],
+    "curriculum_keywords": [
+      "Teaching Methods",
+      "Classroom Management",
+      "Child Development",
+      "Pedagogy",
+      "Lesson Planning"
+    ],
+    "industry_keywords": [
+      "Education",
+      "School Administration",
+      "Curriculum Development"
+    ],
+    "learning_style": ["Practical", "Theory (classroom practice, workshops, teaching simulations)"]
+  },
+  {
+    "major_id": "SU-ELL",
+    "major_name": "Bachelor of Arts in English Language and Literature",
+    "university_name": "Sohar University",
+    "faculty": "College of Education and Arts",
+    "degree_type": "BA",
+    "duration": 4,
+    "required_hs_subjects": ["English", "Arabic", "Literature"],
+    "min_grade_requirements (%)": [75, 70, 70],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "English Teacher",
+      "Translator",
+      "Editor",
+      "Content Writer",
+      "Curriculum Developer"
+    ],
+    "curriculum_keywords": [
+      "English Literature",
+      "Linguistics",
+      "Writing Skills",
+      "Literary Analysis",
+      "Grammar",
+      "Creative Writing",
+      "Pedagogy"
+    ],
+    "industry_keywords": [
+      "Education",
+      "Translation",
+      "Publishing",
+      "Media",
+      "Content Creation"
+    ],
+    "learning_style": ["Theory", "Practical (language labs, literary analysis, teaching practice)"]
+  },
+  {
+    "major_id": "SU-LAW",
+    "major_name": "Bachelor of Law",
+    "university_name": "Sohar University",
+    "faculty": "College of Law",
+    "degree_type": "LLB",
+    "duration": 4,
+    "required_hs_subjects": ["English", "Arabic", "Social Studies"],
+    "min_grade_requirements (%)": [70, 70, 65],
+    "min_overall_percentage (%)": 70,
+    "example_career_paths": [
+      "Lawyer",
+      "Legal Advisor",
+      "Judge",
+      "Legal Consultant",
+      "Policy Analyst"
+    ],
+    "curriculum_keywords": [
+      "Constitutional Law",
+      "Civil Law",
+      "Criminal Law",
+      "International Law",
+      "Contract Law",
+      "Legal Research",
+      "Legal Writing"
+    ],
+    "industry_keywords": [
+      "Law",
+      "Legal Services",
+      "Public Administration",
+      "Policy",
+      "Corporate Governance"
+    ],
+    "learning_style": ["Theory", "Practical (moot courts, case studies, research projects)"]
+  },
+  {
+    "major_id": "UN-FLF",
+    "major_name": "Diploma in Foreign Language (French & Translation)",
+    "university_name": "University of Nizwa",
+    "faculty": "College of Arts & Sciences",
+    "degree_type": "Diploma",
+    "duration": 2,
+    "required_hs_subjects": ["English", "Arabic", "French"],
+    "min_grade_requirements (%)": [70, 70, 65],
+    "min_overall_percentage (%)": 70,
+    "example_career_paths": [
+      "Translator",
+      "Interpreter",
+      "Language Teacher",
+      "Localization Specialist",
+      "Cultural Liaison"
+    ],
+    "curriculum_keywords": [
+      "French Grammar",
+      "Translation Techniques",
+      "Oral Communication",
+      "Writing Skills",
+      "Cultural Studies",
+      "Language Labs"
+    ],
+    "industry_keywords": [
+      "Translation",
+      "Education",
+      "International Relations",
+      "Media",
+      "Cultural Institutions"
+    ],
+    "learning_style": ["Theory", "Practical (language labs, translation exercises, oral presentations)"]
+  },
+  {
+    "major_id": "UN-CHE",
+    "major_name": "Bachelor of Education in Chemistry",
+    "university_name": "University of Nizwa",
+    "faculty": "College of Education and Sciences",
+    "degree_type": "BEd",
+    "duration": 4,
+    "required_hs_subjects": ["Chemistry", "Mathematics", "English"],
+    "min_grade_requirements (%)": [75, 70, 70],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Chemistry Teacher",
+      "Laboratory Instructor",
+      "Educational Consultant",
+      "Research Assistant"
+    ],
+    "curriculum_keywords": [
+      "General Chemistry",
+      "Organic Chemistry",
+      "Inorganic Chemistry",
+      "Analytical Chemistry",
+      "Pedagogy",
+      "Laboratory Techniques"
+    ],
+    "industry_keywords": [
+      "Education",
+      "Research",
+      "Laboratory",
+      "Pharmaceuticals"
+    ],
+    "learning_style": ["Theory", "Practical (labs, teaching practice, experiments)"]
+  },
+  {
+    "major_id": "UN-MAT",
+    "major_name": "Bachelor of Education in Maths",
+    "university_name": "University of Nizwa",
+    "faculty": "College of Education and Sciences",
+    "degree_type": "BEd",
+    "duration": 4,
+    "required_hs_subjects": ["Mathematics", "English", "Physics"],
+    "min_grade_requirements (%)": [75, 70, 65],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Mathematics Teacher",
+      "Curriculum Developer",
+      "Educational Consultant",
+      "Math Tutor"
+    ],
+    "curriculum_keywords": [
+      "Algebra",
+      "Calculus",
+      "Geometry",
+      "Statistics",
+      "Pedagogy",
+      "Teaching Methods"
+    ],
+    "industry_keywords": [
+      "Education",
+      "Curriculum Development",
+      "Tutoring",
+      "Educational Research"
+    ],
+    "learning_style": ["Theory", "Practical (teaching practice, workshops, problem-solving sessions)"]
+  },
+  {
+    "major_id": "UN-STAT",
+    "major_name": "Bachelor of Science in Statistics",
+    "university_name": "University of Nizwa",
+    "faculty": "College of Science",
+    "degree_type": "BSc",
+    "duration": 4,
+    "required_hs_subjects": ["Mathematics", "English", "Physics"],
+    "min_grade_requirements (%)": [75, 70, 65],
+    "min_overall_percentage (%)": 75,
+    "example_career_paths": [
+      "Statistician",
+      "Data Analyst",
+      "Actuarial Analyst",
+      "Research Scientist",
+      "Market Analyst"
+    ],
+    "curriculum_keywords": [
+      "Probability",
+      "Statistical Methods",
+      "Data Analysis",
+      "Econometrics",
+      "Statistical Computing",
+      "Experimental Design"
+    ],
+    "industry_keywords": [
+      "Statistics",
+      "Research",
+      "Finance",
+      "Marketing",
+      "Government",
+      "Data Science",
+      "insurance"
+    ],
+    "learning_style": ["Theory", "Practical (data labs, statistical software, research projects)"]
+  },
+  {
+    "major_id": "UN-FD",
+    "major_name": "Bachelor of Education in Fine Arts – Fashion Design",
+    "university_name": "University of Nizwa",
+    "faculty": "College of Arts & Sciences",
+    "degree_type": "BEd",
+    "duration": 4,
+    "required_hs_subjects": ["Arabic", "English", "Fine Arts"],
+    "min_grade_requirements (%)": [80, 80, 80],
+    "min_overall_percentage (%)": 80,
+    "example_career_paths": [
+      "Fashion Designer",
+      "Fashion Trainer",
+      "Independent Designer",
+      "Workshop Instructor"
+    ],
+    "curriculum_keywords": [
+      "Fashion Design Studios",
+      "Drawing & Sketching",
+      "Textile Science",
+      "Pattern Making",
+      "Sewing & Garment Construction",
+      "Digital Fashion Design",
+      "Portfolio Development",
+      "Internship"
+    ],
+    "industry_keywords": [
+      "Fashion & Apparel",
+      "Textile Industry",
+      "Creative Design",
+      "Education",
+      "Fashion Marketing",
+      "Media & Advertising"
+    ],
+    "learning_style": ["Practical", "Theory (design studios, labs, portfolio, projects)"]
+  }
+]
